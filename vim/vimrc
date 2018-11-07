@@ -2,6 +2,8 @@ colorscheme blayu
 syntax on
 syntax enable           " enable syntax processing
 
+" Load path for plugins
+execute pathogen#infect()
 
 " Spaces & tabs
 set tabstop=4           " number of visual spaces per TAB
@@ -34,10 +36,12 @@ nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
 
 " Plugins
-autocmd vimenter * NERDTree
+" Open nerd tree if no file opened
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Open Nerd tree if something else ... hehe
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
+" Open close nerd tree with ctrl+n
+map <C-n> :NERDTreeToggle<CR>
 
